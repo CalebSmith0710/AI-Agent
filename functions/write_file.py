@@ -6,10 +6,13 @@ def write_file(working_directory, file_path, content):
 
     path = os.path.abspath(os.path.join(working_directory, file_path))
 
-    print(f"Path: {path}")
-    if not os.path.exists(path):
-        os.makedirs(path)
+    try:
+        if not os.path.exists(path):
+            os.makedirs(path)
 
-    with open(file_path, "w")
-
-    #f'Successfully wrote to "{file_path}" ({len(content)} characters written)'
+        with open(path, "w") as a_file:
+            a_file.write(content)
+        
+        return f'Successfully wrote to "{file_path}" ({len(content)} characters written)'
+    except Exception as e:
+        return f"Error writing to file: {e}"
