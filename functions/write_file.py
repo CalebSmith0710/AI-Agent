@@ -1,5 +1,23 @@
 import os
+from google.genai import types
 
+schema_write_file = types.FunctionDeclaration(
+    name="write_file",
+    description="Overwrites the contents of an existing file if it exists, else creates a new file and writes to it.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The path to the file to which we are trying to write.",
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="The content that will be written to the file located at the file path."
+            ),
+        },
+    ),
+)
 
 def write_file(working_directory, file_path, content):
     abs_working_dir = os.path.abspath(working_directory)

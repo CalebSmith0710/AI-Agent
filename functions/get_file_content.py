@@ -1,5 +1,21 @@
-from config import MAX_CHARS
 import os
+from config import MAX_CHARS
+from google.genai import types
+
+
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Retrieves the content of a file at the specified file path.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The path to the file for which we want to retrieve the content.",
+            ),
+        },
+    ),
+)
 
 def get_file_content(working_directory, file_path):
     if file_path not in working_directory:
