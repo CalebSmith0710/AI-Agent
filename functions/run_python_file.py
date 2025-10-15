@@ -12,7 +12,7 @@ schema_run_python_file = types.FunctionDeclaration(
             "file_path": types.Schema(
                 type=types.Type.STRING,
                 description="The path to the file which we are trying to run.",
-            ),
+            ),  
         },
     ),
 )

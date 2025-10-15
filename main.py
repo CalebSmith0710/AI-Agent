@@ -8,6 +8,7 @@ from functions.get_files_info import schema_get_files_info
 from functions.get_file_content import schema_get_file_content
 from functions.write_file import schema_write_file
 from functions.run_python_file import schema_run_python_file
+from functions.call_function import call_function
 
 def main():
     load_dotenv()
@@ -61,6 +62,11 @@ def generate_content(client, messages, verbose):
     if isinstance(function_calls, list) and len(function_calls) > 0:
         for function_call in function_calls:
             print(f"Calling function: {function_call.name}({function_call.args})")
+            content = call_function(function_call)
+            if content.parts[0].function_response.response == None:
+                raise Exception("Fatal error")
+            elif verbose:
+                print(f"-> {content.parts[0].function_response.response}")
     else:
         print(response.text)
 
